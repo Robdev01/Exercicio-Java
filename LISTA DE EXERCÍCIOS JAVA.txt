@@ -1,0 +1,92 @@
+================================================================================
+                    LISTA DE EXERCÍCIOS JAVA PLENO - BIG TECHS
+                           Professor Java - 2026
+================================================================================
+
+DESAFIO 1: STRINGBUILDER VS OPERADOR +
+--------------------------------------------------------------------------------
+- Concatene 10.000 strings com StringBuilder vs operador +
+- Meça performance: System.nanoTime()
+- FOCO: Imutabilidade + Performance O(n) vs O(n²)
+- SAÍDA ESPERADA: "StringBuilder: 2ms vs +: 300ms (150x mais rápido)"
+
+DESAFIO 2: POLIMORFISMO COM VEÍCULOS
+--------------------------------------------------------------------------------
+Classe abstrata Veiculo {
+    abstract void acelerar(int incremento);
+    abstract void frear(int decremento);
+}
+├── Carro (4 rodas, acelera 0.9x)
+└── Moto (2 rodas, acelera 1.2x)
+
+- Simule corrida: List<Veiculo>
+- Ordene com Comparable por velocidade
+- FOCO: Herança + Polimorfismo + Encapsulamento (private + getters)
+
+DESAFIO 3: TRY-WITH-RESOURCES + EXCEÇÃO CUSTOMIZADA
+--------------------------------------------------------------------------------
+try (BufferedWriter writer = Files.newBufferedWriter(path)) {
+    // transação bancária
+} catch (ContaInvalidaException e) {
+    // saldo < 0
+}
+- FOCO: Resource management + Checked Exceptions (vs Python try/except)
+
+DESAFIO 4: STREAMS + LAMBDAS (100% FUNCIONAL)
+--------------------------------------------------------------------------------
+produtos.stream()
+    .filter(p -> p.preco > 100)
+    .map(p -> p.nome.toUpperCase())
+    .collect(Collectors.groupingBy(Produto::getCategoria))
+
+- FOCO: Programação funcional moderna (sem for/while)
+
+DESAFIO 5: GENERICS COM WILDCARDS
+--------------------------------------------------------------------------------
+Caixa<? super Number> caixa = new Caixa<Integer>();
+Caixa<? extends Number> apenasLeitura = new Caixa<Double>();
+
+- FOCO: Type safety avançado (vs Python any)
+
+DESAFIO 6: TREEMAP + CUSTOM COMPARATOR
+--------------------------------------------------------------------------------
+TreeMap<String, Item> inventario = new TreeMap<>();
+// Ordenado por nome, buscar mais caro por valor
+
+- FOCO: Coleções avançadas + O(log n) performance
+
+DESAFIO 7: CONCORRÊNCIA COM COMPLETABLEFUTURE
+--------------------------------------------------------------------------------
+CompletableFuture.supplyAsync(this::somarPrimos)
+    .thenApply(result -> result * 2)
+
+- 4 threads vs single thread (primos até 1M)
+- FOCO: ExecutorService + AtomicInteger (speedup 3.5x)
+
+DESAFIO 8: RECORDS + SEALED CLASSES + PATTERN MATCHING
+--------------------------------------------------------------------------------
+sealed interface Forma permits Circulo, Retangulo {}
+record Circulo(double raio) implements Forma { ... }
+
+switch (forma) {
+    case Circulo c -> Math.PI * c.raio() * c.raio();
+    case Retangulo r -> r.largura() * r.altura();
+}
+
+- FOCO: Java moderno 17+ (vs namedtuple Python)
+
+================================================================================
+ESTRUTURA GITHUB RECOMENDADA:
+================================================================================
+java-pleno-desafios/
+├── README.md (prints + badges CI/CD)
+├── pom.xml (Maven + JUnit 5)
+└── src/main/java/
+    └── Desafio1.java ... Desafio8.java (cada um com main() + testes)
+
+COMANDO: mvn clean test
+EXECUTAR: mvn exec:java -Dexec.mainClass="Desafio1"
+
+================================================================================
+PARA RECRUTADORES: Clean Code + 100% Test Coverage + Benchmarks Reais + Java 17
+================================================================================
