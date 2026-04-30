@@ -1,0 +1,2 @@
+Saldo inicial: 100.0
+Saque de 50 realizado. Saldo: 50.0
